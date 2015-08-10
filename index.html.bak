@@ -11,26 +11,79 @@
 </head>
 <body>
     <div ng-app="app">
+    		&nbsp;&nbsp;
         <div ng-controller="SearchController as search">
-            <div class="container-fluid">
-                <form name="search.searchForm" class="form-inline" ng-submit="search.submit()">
-                    <label for="inputEmail">Search Terms:</label>
-                    <input type="text" class="input-medium search-query" ng-minlength="3" ng-required="true" ng-model="search.keywords">
-                    <label for="inputEmail">Abfrage nach:</label>
-                    <div class="btn-group">
-                        <label class="btn btn-primary" ng-model="search.type" btn-radio="'Application'">Application</label>
-                        <label class="btn btn-primary" ng-model="search.type" btn-radio="'ITService'">IT-Service</label>
-                        <label class="btn btn-primary" ng-model="search.type" btn-radio="'All'">Alle</label>
-                    </div>
-                    <input name="submit" class="submit btn btn-default" id="submit" style="display: inline-block;" type="submit" value="Search">
+        		<div class="container-fluid">
+                <form name="search.searchForm" class="form-horizontal" ng-submit="search.submit()">
+                	<div class="form-group">
+                		<label for="inputSearch" class="col-sm-2 control-label">Suchbegriff:</label>
+                		<div class="col-sm-10">
+                			<input type="text" class="form-control" ng-required="true" ng-model="search.keywords">
+                		</div>
+                		<!-- <div class="col-sm-offset-2 col-sm-10 checkbox-inline">
+                			<div ng-repeat="facet in facets">
+                				<label class="btn btn-primary" ng-model="facet.name" btn-checkbox> {{facet.name}}	</label>
+                			</div>
+                		</div> -->
+            				
+                	</div>
+                  <div class="form-group">
+                  	<label for="inputcheckbox" class="col-sm-2 control-label">Abfrage nach:</label>
+                  		<div class="col-sm-10">
+	                  	  <div class="btn-group">
+	                  	  	<!-- <pre>App: {{search.Application}}</pre>
+	                  	  	<pre>App: {{search.ITService}}</pre>
+	                  	  	<pre>App: {{search.All}}</pre> -->
+									        <label class="btn btn-primary" ng-model="search.AccessService" btn-checkbox> AccessService</label>
+									        <label class="btn btn-primary" ng-model="search.Applikation" btn-checkbox> Applikation</label>
+									        <label class="btn btn-primary" ng-model="search.BulkInterface" btn-checkbox> BulkInterface</label>
+									        <label class="btn btn-primary" ng-model="search.Fachbegriff" btn-checkbox> Fachbegriff</label>
+									        <label class="btn btn-primary" ng-model="search.PresentationService" btn-checkbox> PresentationService</label>
+									        <label class="btn btn-primary" ng-model="search.Projekt" btn-checkbox> Projekt</label>
+									        <label class="btn btn-primary" ng-model="search.SoaService" btn-checkbox> SoaService</label>
+									        <label class="btn btn-primary" ng-model="search.undefined" btn-checkbox> undefined</label>
+		
+									      </div>
+									    </div>
+									    <!--
+									    <div class="col-sm-offset-2 col-sm-10">
+	                  	  <div class="checkbox">
+									        <label class="checkbox-inline">
+									          <input type="checkbox" ng-model="search.type" btn-radio="'Application'"> Applikation
+									        </label>
+									      </div>
+									    </div>
+											<div class="col-sm-offset-2 col-sm-10">
+	                  	  <div class="checkbox">
+									        <label class="checkbox-inline">
+									          <input type="checkbox" ng-model="search.type" btn-radio="'ITService'"> ITService
+									        </label>
+									      </div>
+									    </div>
+									    <div class="col-sm-offset-2 col-sm-10">
+	                  	  <div class="checkbox">
+									        <label class="checkbox-inline">
+									        	<input type="checkbox" ng-model="search.type" btn-radio="'All'"> Alle
+									        </label>
+									      </div>
+									    </div>-->
+                  </div>
+                  <div class="form-group">
+                  		<div class="col-sm-offset-2 col-sm-10">
+                  			<input name="submit" class="submit btn btn-default" id="submit" style="display: inline-block;" type="submit" value="Suche">
+                  		</div>
+                	</div>
                 </form>
-
-                <div ng-repeat="result in search.results">
-                		<h3>Number of Search Results:{{search.results.count}</h3>
-                    <a class="h1" target="_new" href="{{result.URL}}">{{result.Name}}</a>
-                    <div class="h6" ng-bind-html="result.Beschreibung">{{result.Beschreibung}}</div>
-                    <div ng-bind-html="result.id_axa">{{result.id_axa}}</div>
+                <div ng-show="search.showSearchResults">
+                    <h3>Suchergebnisse</h3>
                 </div>
+                <div ng-repeat="result in search.results">
+                		
+                	  <div class="h4"><a class="btn btn-primary btn-lg active" target="_new" href="{{result.URL}}">{{result.Name}}</a>&nbsp;&nbsp;<small>{{result.Typ}}</small></div>
+                    <div class="h6" ng-bind-html="result.Beschreibung">{{result.Beschreibung}}</div>
+                    
+                </div>
+              	
             </div>
         </div>
     </div>
